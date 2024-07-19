@@ -48,10 +48,10 @@
 // console.log(dirPath);
 
 // for(let i = 0; i < 5; i++) {
-  // fs.writeFileSync(`${dirPath}/hello${i}.txt`, "A simple text file"); // create five new files
-  // fs.unlinkSync(`${dirPath}/hello${i}.txt`);  // remove the five files
-  // fs.writeFileSync(dirPath+"/test"+i+".txt", "A simple text file"); // create five new files
-  // fs.unlinkSync(dirPath+"/test"+i+".txt"); // remove the five files
+// fs.writeFileSync(`${dirPath}/hello${i}.txt`, "A simple text file"); // create five new files
+// fs.unlinkSync(`${dirPath}/hello${i}.txt`);  // remove the five files
+// fs.writeFileSync(dirPath+"/test"+i+".txt", "A simple text file"); // create five new files
+// fs.unlinkSync(dirPath+"/test"+i+".txt"); // remove the five files
 // }
 
 
@@ -117,21 +117,185 @@
 
 
 
-let a = 10;
-let b = 0;
+// let a = 10;
+// let b = 0;
 
 
-let waitingData = new Promise((resolve, reject) => {
-  setTimeout(() => {
-    resolve(20)
-  }, 2000);
+// let waitingData = new Promise((resolve, reject) => {
+//   setTimeout(() => {
+//     resolve(20)
+//   }, 2000);
+// })
+
+// waitingData.then((data) => {
+//   b = data;
+//   console.log(a + b);
+// })
+
+
+// console.log(a + b);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// console.log("First Log");
+
+// setTimeout(() => {
+//   console.log("Second Log 2 second delay")
+// }, 2000);
+
+// setTimeout(() => {
+//   console.log("Third Log 0 second delay")
+// }, 0);
+
+// console.log("Fourth Log");
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// const express = require('express');
+// const app = express();
+
+// app.get('', (req, res) => {
+//   res.send("Hello, this is home page")
+// })
+
+// app.get('/about', (req, res) => {
+//   res.send("Hello, this is about us page")
+// })
+
+// app.get('/help', (req, res) => {
+//   res.send("Hello, this is help page")
+// })
+
+// app.get('/myname', (req, res) => {
+//   res.send("Your name is "+ req.query.name)
+//   console.log("Name Received:", req.query.name)
+// })
+
+// app.listen(5000);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// const express = require('express');
+// const path = require('path');
+// const app = express();
+// const publicPath = path.join(__dirname, 'public');
+// app.set('view engine', 'ejs');
+
+// app.get('/profile', (req, res) => {
+//   const user = {
+//     name: 'John Doe',
+//     age: 30,
+//     email: 'johndoe@test.com',
+//     hobbies: ['reading', 'painting', 'cooking'],
+//     city: "Ellenabad"
+//   }
+//   res.render('profile', {user});
+// })
+
+// app.get('/login', (req, res) => {
+//   res.render('login');
+// })
+
+// app.get('/', (req, res) => {
+//   res.sendFile(`${publicPath}/index.html`);
+// })
+
+// app.get('/about', (req, res) => {
+//   res.sendFile(`${publicPath}/about.html`);
+// })
+
+// app.get('/help', (req, res) => {
+//   res.sendFile(`${publicPath}/help.html`);
+// })
+
+// app.get('*', (req, res) => {
+//   res.sendFile(`${publicPath}/notFound.html`);
+// })
+
+// app.listen(5000);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+const express = require('express');
+
+const app = express();
+
+const reqFilter = (req, res, next) => {
+  if (!req.query.age) {
+    res.send("Please Provide your age");
+  } else if (req.query.age < 18) {
+    res.send("You can not access this page");
+  } else {
+    next();
+  }
+}
+
+app.use(reqFilter)
+
+app.get('/', (req, res) => {
+  res.send("Hello, this is home page")
 })
 
-waitingData.then((data) => {
-  b = data;
-  console.log(a + b);
+app.get('/users', (req, res) => {
+  res.send("Hello, this is Users page")
 })
 
-
-console.log(a + b);
-
+app.listen(5000);
